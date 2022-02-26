@@ -35,7 +35,7 @@ class ConnectionController():
 class ContractManager():
     def __init__(self, web3):
         self.connection = web3
-        self.contracts_names = ["EnergyToken", "EnergyProviders"]
+        self.contracts_names = ["EnergyToken"]
         self.contracts_path = RELATIVE_CONTRACT_PATH
         self.contracts = {}
         self.contracts_addresses = []
