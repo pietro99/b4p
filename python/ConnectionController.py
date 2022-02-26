@@ -1,4 +1,6 @@
 from web3 import Web3
+from web3.middleware import geth_poa_middleware
+
 import os
 from dotenv import load_dotenv
 import solcx as solcx
@@ -28,6 +30,8 @@ class ConnectionController():
 
 
         self.web3 = Web3(self.provider)
+        self.web3.middleware_onion.inject(geth_poa_middleware, layer=0)
+
         self.transaction_dict = {
             "chainId": self.CHAIN_ID,
         }
