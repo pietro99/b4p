@@ -12,8 +12,13 @@ If you have already cloned the repository you can pull the submodule by:
 git submodule update --init --recursive
 ```
 ##### setting environments variables
-create a .env file inside the [python](/python) folder and copy the [.env.example](/python/.env.example) file content to it. \n
+create a .env file inside the [python](/python) folder and copy the [.env.example](/python/.env.example) file content to it.
 the code uses an [infura](https://infura.io/) node to connect to the mumbai testnetwork and a private key from a wallet as a faucet to fund the test wallets.
 you will need to provide your own key and id inside the .env file, the placeholder values are fake. **(do not use a private key from an active mainnet wallet)**
 
-
+##### installing python requirements
+the python requirements can be installed by running:
+```bat
+pip install -r ./python/requirements.txt
+```
+it is advisable to create a fresh python environment before installing the requirements.
