@@ -14,6 +14,6 @@ git submodule update --init --recursive
 ##### setting environments variables
 create .env file inside the [python](/python) folder and copy the [.env.example](/python/.env.example) file to it.
 the code uses an [infura](https://infura.io/) node to connect to the mumbai testnetwork and a private key from a wallet as a faucet to fund the test wallets.
-you will need to provide your own key and id inside the .env file, the placeholder values are fake. (**do not use a private key from an active mainnet wallet **)
+you will need to provide your own key and id inside the .env file, the placeholder values are fake. **(do not use a private key from an active mainnet wallet)**
 
 
