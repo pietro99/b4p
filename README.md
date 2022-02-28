@@ -15,6 +15,7 @@ git submodule update --init --recursive
 create a .env file inside the [python](/python) folder and copy the [.env.example](/python/.env.example) file content to it.
 the code uses an [infura](https://infura.io/) node to connect to the mumbai testnetwork and a private key from a wallet as a faucet to fund the test wallets.
 you will need to provide your own key and id inside the .env file, the placeholder values are fake. **(do not use a private key from an active mainnet wallet)**
+the faucet needs to have at least 0.5 MATIC to be able to fund new accounts. you can fund your mumbai wallet [here](https://faucet.polygon.technology/)
 
 ##### installing python requirements
 the python requirements can be installed by running:
@@ -22,3 +23,11 @@ the python requirements can be installed by running:
 pip install -r ./python/requirements.txt
 ```
 it is advisable to create a fresh python environment before installing the requirements.
+
+##### running the code
+finally the code can be tested by running:
+```bat
+cd python
+python main.py
+```
+
