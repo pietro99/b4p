@@ -5,5 +5,14 @@ In order to clone the repo together with the submodules run
 ```bat
 git clone --recurse-submodules https://github.com/pietro99/b4p.git
 ```
+If you have already cloned the repository you can pull the submodule by:
+```bat
+git submodule update --init --recursive
+```
+##### setting environments variables
+copy the [.env.example](/python/.env.example) file
+
+
+
 
 
