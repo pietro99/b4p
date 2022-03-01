@@ -13,9 +13,9 @@ git submodule update --init --recursive
 ```
 ##### setting environments variables
 create a .env file inside the [python](/python) folder and copy the [.env.example](/python/.env.example) file content to it.
-the code uses an [infura](https://infura.io/) node to connect to the mumbai testnetwork and a private key from a wallet as a faucet to fund the test wallets.
-you will need to provide your own private key and infura id inside the .env file, the placeholder values are fake. **(do not use a private key from an active mainnet wallet)**
-the faucet needs to have at least 0.5 MATIC to be able to fund new accounts. you can fund your mumbai faucet wallet [here](https://faucet.polygon.technology/)
+the code uses an [infura](https://infura.io/) node to connect to the mumbai testnetwork and a private key from a wallet as an app faucet to fund the test wallets.
+you will need to provide your own private key and infura id inside the .env file. **(do not use a private key from an active mainnet wallet)**
+the app faucet needs to have at least 0.5 MATIC to be able to fund new accounts. you can fund your mumbai faucet wallet [here](https://faucet.polygon.technology/) or you can use the mumbai faucet programmatically by using the [faucet script](##### faucet script)
 
 ##### installing python requirements
 the python requirements can be installed by running:
@@ -30,4 +30,10 @@ finally the code can be tested by running:
 cd python
 python main.py
 ```
+
+##### faucet script
+
+the [faucet script](/python/faucet_script.py) can be called by running `python faucet_script.py` and it will request 0.5 MATIC of funds from the official mumbai faucet to your app faucet (specified in the .env file). the request are made approximately once every 60 seconds. keep in mind that many times the request is not successfull and that the mumbai faucet will not accept requests from wallets with a balance greater than 10 MATIC which should be enough for testing the smart contracts.
+
+
 

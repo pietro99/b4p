@@ -32,9 +32,7 @@ class ConnectionController():
         self.web3 = Web3(self.provider)
         self.web3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
-        self.transaction_dict = {
-            "chainId": self.CHAIN_ID,
-        }
+      
 
 class ContractManager():
     def __init__(self, web3):
@@ -62,19 +60,19 @@ class ContractManager():
                     except solcx.exceptions.SolcNotInstalled as e:
                         print("solcx correct version not installed. we are installing it for you")
                         solcx.install_solc(os.getenv('SOLIDITY_V'))    
+    
 
-    def deploy(self, contract_name, function_name,account,*args):
+    def deploy(self, contract_name,account,**kwargs):
+        args = kwargs.values()
         try:
             contract = self.contracts[contract_name]
         except KeyError as e:
             raise KeyError(contract_name+" was not as a compiled contract.")
-        transaction_dict = self.connection.transaction_dict
+        transaction_dict = {}
         transaction_dict["nonce"] = self.connection.web3.eth.get_transaction_count(account.account.address)
         transaction_dict["from"] = account.account.address
-        if function_name == "constructor":
-            contract_function = getattr(contract, function_name)
-        else:
-            contract_function = getattr(contract.functions, function_name)
+        transaction_dict["chainId"] = self.connection.CHAIN_ID
+        contract_function = getattr(contract, "constructor")
         gas = contract_function(*args).estimateGas()
         transaction_dict["gas"] = gas*2
         tx = contract_function(*args).buildTransaction(transaction_dict)
@@ -87,31 +85,32 @@ class ContractManager():
         account.addContract(contract_instance)
         return tx_receipt
 
+
     def call(self,contract,function_name,account, **kwargs):
+        value = kwargs.pop('value') if "value" in kwargs.keys() else 0
+        print(value)
         args = kwargs.values()
-        transaction_dict = self.connection.transaction_dict
-        transaction_dict["nonce"] = self.connection.web3.eth.get_transaction_count(account.account.address)
+        transaction_dict = {}
         transaction_dict["from"] = account.account.address
-        if function_name == "constructor":
-            contract_function = getattr(contract, function_name)
-        else:
-            contract_function = getattr(contract.functions, function_name)
-        gas = contract_function(*args).estimateGas({"from":account.account.address})
+        transaction_dict["value"] = value
+        contract_function = getattr(contract.functions, function_name)
+        gas = contract_function(*args).estimateGas(transaction_dict)
         transaction_dict["gas"] = gas*2
+        transaction_dict["nonce"] = self.connection.web3.eth.get_transaction_count(account.account.address)
+        transaction_dict["chainId"] = self.connection.CHAIN_ID
         tx = contract_function(*args).buildTransaction(transaction_dict)
         signed_txn = account.account.signTransaction(tx)
         tx_hash = self.connection.web3.eth.sendRawTransaction(signed_txn.rawTransaction)
         tx_receipt = self.connection.web3.eth.waitForTransactionReceipt(tx_hash)
         return tx_receipt
     
-    def read(self,contract,function_name,account, *args):
-        transaction_dict = self.connection.transaction_dict
+    def read(self,contract,function_name,account, **kwargs):
+        args = kwargs.values()
+        transaction_dict = {}
         transaction_dict["nonce"] = self.connection.web3.eth.get_transaction_count(account.account.address)
         transaction_dict["from"] = account.account.address
-        if function_name == "constructor":
-            contract_function = getattr(contract, function_name)
-        else:
-            contract_function = getattr(contract.functions, function_name)
+        transaction_dict["chainId"] = self.connection.CHAIN_ID
+        contract_function = getattr(contract.functions, function_name)
         gas = contract_function(*args).estimateGas()
         transaction_dict["gas"] = gas*2
         tx = contract_function(*args).call()

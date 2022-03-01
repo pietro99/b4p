@@ -9,17 +9,31 @@ if conn.web3.isConnected():
 cm = ContractManager(conn)
 
 #create a bot with a wallet
-bot1 = BotAccount(conn)
+energyProvider = BotAccount(conn)
+energyBuyer = BotAccount(conn)
+
 
 #deploy Token Contract
-tx1 = cm.deploy("EnergyToken", "constructor", bot1, "https://metadata.com/")
+tx1 = cm.deploy("EnergyToken", energyProvider, metadata = "https://metadata.com/")
 print("\n\ndeployment transaction:\n"+str(tx1))
 
 #read address of contract owner
-tx2 = cm.read(bot1.getLatestContract(), "energyProvider", bot1)
+tx2 = cm.read(energyProvider.getLatestContract(), "owner", energyBuyer)
 print("\n\nenergy provider address:\n\n"+str(tx2))
 
 #mint a new batch of 1000 tokens representing 100kw each
-tx3 = cm.call(bot1.getLatestContract(), "addEnergyBatch", bot1, energy=100, amount=1000)
+tx3 = cm.call(energyProvider.getLatestContract(), "addEnergyBatch", energyProvider, energy=100, amount=1000, price = 10000000000)
 print("\n\ntoken mint transaction:\n\n"+str(tx3))
 
+#mint a new batch of 1000 tokens representing 100kw each
+token_id = cm.read(energyProvider.getLatestContract(), "energyToToken", energyBuyer, energy=100)
+print("\n\ntoken id:\n\n"+str(token_id))
+
+#mint a new batch of 1000 tokens representing 100kw each
+price = cm.read(energyProvider.getLatestContract(), "getPrice",energyBuyer, id=token_id, amount=1000)
+print("\n\nprice:\n\n"+str(price))
+
+
+#mint a new batch of 1000 tokens representing 100kw each
+tx4 = cm.call(energyProvider.getLatestContract(), "safeBuy", energyProvider, id=token_id, amount=1000, value=price)
+print("\n\nbuy transaction: \n\n"+str(tx4))

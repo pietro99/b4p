@@ -21,13 +21,10 @@ class BotAccount():
             'gas': 2000000,
             'gasPrice':  self.connection.web3.toWei('10', 'gwei')
         }
-
+        
         signed_tx = faucet_account.sign_transaction(tx)
-
         tx_hash = self.connection.web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-
         tx_receipt = self.connection.web3.eth.waitForTransactionReceipt(tx_hash)
-
         print("\n\nfunding wallet account from faucet:\n\n"+str(tx_receipt))
 
     def addContract(self, contract):
