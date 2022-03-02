@@ -14,7 +14,6 @@ import "./openzeppelin/contracts/access/Ownable.sol";
 
 /**
 * @title ERC1155 token for energy tokenization
-* @author Pietro Piccini
 * @notice This contract allows energy providers to create tokens representing the energy they want to sell
 * @dev This contract is still in an experimental phase
  */
@@ -39,7 +38,6 @@ contract EnergyToken is Context, ERC165, IERC1155, IERC1155MetadataURI, Ownable 
     // Used as the URI for all token types by relying on ID substitution, e.g. https://token-cdn-domain/{id}.json
     string private _uri;
 
-/// @author Pietro Piccini
 /// @notice This constructor will initialize a new contract 
 /// @param uri_ the url pointing to the JSON description of the energy source
 /// @dev The url is shared among all tokens minted in this contract, so the metadata is specific to each EnergyToken contract

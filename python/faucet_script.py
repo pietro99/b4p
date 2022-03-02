@@ -24,6 +24,7 @@ while True:
       print("an error occured waiting a bit longer...")
       time.sleep(320)
     if "hash" in response:
+        print(response)
         print("0.5 Matic were sent to: " + faucet_address+"\n")
     elif "duration" in response:
         duration = abs(response["duration"])/1000
