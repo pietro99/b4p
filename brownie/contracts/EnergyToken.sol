@@ -8,11 +8,11 @@ import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
-import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
+import  "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
-
+import "@openzeppelin/contracts/utils/introspection/ERC165Checker.sol";
 
 
 /**
@@ -24,11 +24,9 @@ contract EnergyToken is Context, ERC165, IERC1155, IERC1155MetadataURI, Ownable 
     using Address for address;
     using Counters for Counters.Counter;
 
-    AggregatorV3Interface internal EUR;
-
     struct balance {
         uint ethBalance;
-        mapping(address => uint) coinBalance;
+        mapping(IERC20 => uint) coinBalance;
     }
 
     struct tokenForSale {
@@ -38,13 +36,17 @@ contract EnergyToken is Context, ERC165, IERC1155, IERC1155MetadataURI, Ownable 
 
     mapping(address => balance) public balances; 
 
-    mapping(address => IERC20) coins;
+    mapping(IERC20 => AggregatorV3Interface) public acceptedCoins;
+
     Counters.Counter private _tokenIdCounter;
 
     //mapping that maps enrgy amount --> tokeknID
     mapping(uint  => uint ) public energyToToken;
 
     mapping(address => mapping(uint => tokenForSale)) private tokensPrice;
+
+
+
 
 
     // Mapping from token ID to account balances
@@ -55,7 +57,6 @@ contract EnergyToken is Context, ERC165, IERC1155, IERC1155MetadataURI, Ownable 
 
     // Used as the URI for all token types by relying on ID substitution, e.g. https://token-cdn-domain/{id}.json
     string private _uri;
-
 
 /** 
 * @notice This constructor will initialize a new contract 
@@ -102,18 +103,18 @@ contract EnergyToken is Context, ERC165, IERC1155, IERC1155MetadataURI, Ownable 
     }
 
 
-    function sendToken(uint _amount, address _tokenAddress) public {
-        IERC20 mycoin = coins[_tokenAddress];
-        mycoin.transferFrom(msg.sender, address(this), _amount);
+
+
+
+    function _sendToken(uint _amount, IERC20 coin) public {
+        coin.transferFrom(msg.sender, address(this), _amount);
     }
 
     function getPrice(uint _id, uint _amount, address _from) public view returns(uint){ 
         return tokensPrice[_from][_id].price*_amount;
     }
 
-    function coinBalance(address _coinAddress) public view returns(uint){
-        return coins[_coinAddress].balanceOf(address(this));
-    }
+   
 
     function getEnergyTokenId(uint _energy) public view returns(uint){ 
         return energyToToken[_energy];
@@ -131,10 +132,41 @@ contract EnergyToken is Context, ERC165, IERC1155, IERC1155MetadataURI, Ownable 
         withdrawFunds(this.totalBalance());
    }
 
-
-   function acceptCoin(address _coinAddress) external onlyOwner(){
-       coins[_coinAddress] = IERC20(_coinAddress);
+   function acceptCoin(address _coinAddress, address _aggregatorAddress) external onlyOwner(){
+       acceptedCoins[IERC20(_coinAddress)] = AggregatorV3Interface(_aggregatorAddress);
    }
+
+/*
+   function convertCoinPrice(IERC20 coin) public view returns(int) {
+        AggregatorV3Interface priceFeed = acceptedCoins[coin];
+        ( , int256 basePrice, , , ) = AggregatorV3Interface(priceFeed).latestRoundData();
+        uint8 baseDecimals = AggregatorV3Interface(priceFeed).decimals();
+        int256 basePrice = scalePrice(basePrice, baseDecimals, _decimals);
+       return getLatestPrice(priceFeed);
+   }
+
+*/
+
+    function scalePrice(int256 _price, uint8 _priceDecimals, uint8 _decimals)
+        internal
+        pure
+        returns (int256)
+    {
+        if (_priceDecimals < _decimals) {
+            return _price * int256(10 ** uint256(_decimals - _priceDecimals));
+        } else if (_priceDecimals > _decimals) {
+            return _price / int256(10 ** uint256(_priceDecimals - _decimals));
+        }
+        return _price;
+    }
+
+
+
+
+   function getLatestPrice(AggregatorV3Interface priceFeed) public view returns (int) {
+        (,int price,,,) = priceFeed.latestRoundData();
+        return price;
+    }
 
    
 

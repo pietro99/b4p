@@ -2,6 +2,8 @@ from web3 import Web3
 from web3.middleware import geth_poa_middleware
 import os
 from dotenv import load_dotenv
+from ens import ENS
+
 load_dotenv()
 
 class ConnectionController():
@@ -26,12 +28,13 @@ class ConnectionController():
 
         elif self.network == "ganache":
             self.provider = Web3.HTTPProvider('http://127.0.0.1:8545')
-            self.chain_id = 5777
+            self.chain_id = 1337
         else:
             raise ValueError("network value of "+network+" is not a valid option. choose between polygon (default) and ethereum")
 
         self.web3 = Web3(self.provider)
         self.web3.middleware_onion.inject(geth_poa_middleware, layer=0)
+        self.ns = ENS.fromWeb3(self.web3)
 
 class Connect():
     def __init__(self, connection):

@@ -1,0 +1,85 @@
+{
+	"compiler": {
+		"version": "0.8.12+commit.f00d7308"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "update",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"gsy-e/Market.sol": "Market"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"gsy-e/Consuming.sol": {
+			"keccak256": "0x36cc87736aa99077aac0a40e8c1d1768cceb384d7fc7852b5d610a43a5a30f6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ccb8170ff70b525db7a3e221bcd27e326d81446c33fccb5e7e3015752cc505f",
+				"dweb:/ipfs/QmUT433cjBwGiV5k9WP4xA9YPmdrEKtkYLSFewndWV7BxU"
+			]
+		},
+		"gsy-e/Market.sol": {
+			"keccak256": "0x466cf21b2094f5ff3c5b36c7f423ea0d182966c25ab834a34d1922e2bac92000",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e3f531fc0db293db4211efaaa7ee4c00cd1d5e6f39a7c874431e7be5e68ef7ca",
+				"dweb:/ipfs/Qmew7mqXQ3c2dFrWgwKZQsMbdChiaWDr6SP7f8xy1L65hC"
+			]
+		},
+		"gsy-e/Node.sol": {
+			"keccak256": "0x3f9e2c3ccab84931fe13f99ce44258b2483fd58dd45f3fe72832570c8b1937c2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://71e25cac60fab4365fd33f534986f6321ef76d51ecf497307e795ecc4921e660",
+				"dweb:/ipfs/QmWQ9gfQbLW1VVwEAR4xHxW2YxVFyBahgEGeKHwofSSMeB"
+			]
+		},
+		"gsy-e/Producing.sol": {
+			"keccak256": "0x345dc66fc8701f0a67fb349064ca024268527a8ac3d85dcd42aec83f860088d8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a487f2273a23e5865c0231d8b91ef22aedcabf736edd920c6b0b5d37a590d9b3",
+				"dweb:/ipfs/QmcTeKt8UFrPUvjMcBT5MSkqgwQqJcVsxof22S5BMfyGDp"
+			]
+		},
+		"gsy-e/Structs.sol": {
+			"keccak256": "0x2a9ebcf05cab617529b01d832db0fc1270321e666f198461da8395df236f42f2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fd5dc1d1443a76c6468e2a1b90991e81f5bdc1d08461061e7030c1401504d66d",
+				"dweb:/ipfs/QmW5n9zLokWjbZydXowTNVN3EoGxswJ6iWdENWFg7tJyg2"
+			]
+		}
+	},
+	"version": 1
+}

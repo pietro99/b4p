@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.12+commit.f00d7308"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"gsy-e/Structs.sol": "SharedStructs"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"gsy-e/Structs.sol": {
+			"keccak256": "0x2a9ebcf05cab617529b01d832db0fc1270321e666f198461da8395df236f42f2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fd5dc1d1443a76c6468e2a1b90991e81f5bdc1d08461061e7030c1401504d66d",
+				"dweb:/ipfs/QmW5n9zLokWjbZydXowTNVN3EoGxswJ6iWdENWFg7tJyg2"
+			]
+		}
+	},
+	"version": 1
+}

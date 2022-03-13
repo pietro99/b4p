@@ -22,9 +22,6 @@ class Wallet(Connect):
     def createAccount(self):
         self.account = self.web3.eth.account.create() 
 
-    def fundAccount(self):
-        self.faucet.sendEther(self.account, FUND_AMOUNT)
-
     def sendEther(self, wallet, amount, denomination = "ether"):
         nonce = self.web3.eth.getTransactionCount(self.account.address)
         tx = {
@@ -48,6 +45,18 @@ class Wallet(Connect):
     def getLatestContract(self):
         return self.contracts[-1]
 
+    def getContract(self, address):
+        for contract in self.contracts:
+            if contract.address == address:
+                return contract
+        raise Exception(f"user does not have contract with address {address}")
+        
+    def balance(self, denomination="ether"):
+        return self.web3.fromWei(self.web3.eth.getBalance(self.address), denomination)
+
+    @property
+    def address(self):
+        return self.account.address
 
 FUND_AMOUNT = 0.5 #amount sent when funding 
 

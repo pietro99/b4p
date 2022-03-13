@@ -1,0 +1,53 @@
+{
+	"compiler": {
+		"version": "0.8.12+commit.f00d7308"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"gsy-e/Node.sol": "Node"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"gsy-e/Node.sol": {
+			"keccak256": "0x3f9e2c3ccab84931fe13f99ce44258b2483fd58dd45f3fe72832570c8b1937c2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://71e25cac60fab4365fd33f534986f6321ef76d51ecf497307e795ecc4921e660",
+				"dweb:/ipfs/QmWQ9gfQbLW1VVwEAR4xHxW2YxVFyBahgEGeKHwofSSMeB"
+			]
+		},
+		"gsy-e/Structs.sol": {
+			"keccak256": "0xa199a1cf0da6eb9982b45b83869161e1f586ad82d0ba14ffa755e72b5537cbad",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f2f80f0738edb4dfd3544c1196df7460853ecb50ae97ea95d7b366e3c49e2622",
+				"dweb:/ipfs/Qmc8GoMQXm1e2jK2mbm2B5WujRoAeNhY31d8Zhyn5XdG5P"
+			]
+		}
+	},
+	"version": 1
+}
