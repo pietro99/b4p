@@ -1,5 +1,5 @@
 # Blockchain 4 Prosumer project
-#### <mark>The most recent Market smart contract is [here](/brownie/contracts/Market/Market.sol)</mark>
+#### <ins>The most recent Market smart contract is [here](/brownie/contracts/Market/Market.sol)</ins>
 
 
 ## Brownie Module
