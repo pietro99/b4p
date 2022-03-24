@@ -3,6 +3,7 @@
 pragma solidity ^0.8.12;
 library SharedStructs {
     struct OfferOrBid {
+        bool is_bid;
         uint created_at;
         uint price;
         uint amount;

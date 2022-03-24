@@ -49,11 +49,11 @@
 			]
 		},
 		"gsy-e/Market.sol": {
-			"keccak256": "0x466cf21b2094f5ff3c5b36c7f423ea0d182966c25ab834a34d1922e2bac92000",
+			"keccak256": "0x4cccf6c093aa629af74951d2d708e23c707513ce6afaa0d85a8f476725e21776",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e3f531fc0db293db4211efaaa7ee4c00cd1d5e6f39a7c874431e7be5e68ef7ca",
-				"dweb:/ipfs/Qmew7mqXQ3c2dFrWgwKZQsMbdChiaWDr6SP7f8xy1L65hC"
+				"bzz-raw://e18645c610760f99e6671f5cd03d94d60f7bbc3dade66d52d23fb142cfd62d17",
+				"dweb:/ipfs/QmcPdwscVTVsPnvZHSognBReKEQtzy7V1xFw2WitjSMBd8"
 			]
 		},
 		"gsy-e/Node.sol": {

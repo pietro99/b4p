@@ -22,7 +22,7 @@ constructor(uint _capacity, uint _production_rate, uint _current_offer, address 
 }
 
 function timeTick() external view returns(Node,SharedStructs.OfferOrBid memory){
-    SharedStructs.OfferOrBid memory offer = SharedStructs.OfferOrBid(block.timestamp, current_offer, production_rate, address(this));
+    SharedStructs.OfferOrBid memory offer = SharedStructs.OfferOrBid(false,block.timestamp, current_offer, production_rate, address(this));
     return (connected_node, offer);
 }
 

@@ -7,4 +7,14 @@ import "./Structs.sol";
 
 contract Node {
 
+function checkMatch(SharedStructs.OfferOrBid[] memory offers) external {
+    for(uint i=0; i<offers.length; i++){
+        if(offers[i].is_bid){
+
+        }
+    }
+
+}
+
+
 }

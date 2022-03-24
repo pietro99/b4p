@@ -4,7 +4,74 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [],
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_capacity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_production_rate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_current_offer",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "node",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "timeTick",
+				"outputs": [
+					{
+						"internalType": "contract Node",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "created_at",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "producer_address",
+								"type": "address"
+							}
+						],
+						"internalType": "struct SharedStructs.OfferOrBid",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -33,19 +100,27 @@
 	},
 	"sources": {
 		"gsy-e/Consuming.sol": {
-			"keccak256": "0x36cc87736aa99077aac0a40e8c1d1768cceb384d7fc7852b5d610a43a5a30f6b",
+			"keccak256": "0xc7a9dfae910dae6a59d670c83a1a8bccd152232e9853a9e6d68cd16324d3632b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4ccb8170ff70b525db7a3e221bcd27e326d81446c33fccb5e7e3015752cc505f",
-				"dweb:/ipfs/QmUT433cjBwGiV5k9WP4xA9YPmdrEKtkYLSFewndWV7BxU"
+				"bzz-raw://fc1692573ac5a928e21f57aff6911e660b3842e62d4ac8fba9740c1580a114bf",
+				"dweb:/ipfs/QmQD8sU8tHCNdjjD5Fj7hasqqpXgL7ufmAHk7orMaaKMUo"
+			]
+		},
+		"gsy-e/Node.sol": {
+			"keccak256": "0x64d5adc7d2003065547f39c968e0733d956f690465ca385a7f660b0d28c60043",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8dc52219a9a933bd2ad87ef36bfd5d160d13f8948815049838473d6589bcd0ff",
+				"dweb:/ipfs/QmWT8CH4cMzv2Qu9LVc8WACTcJ3JFVNkwM8wHmZUkstFYx"
 			]
 		},
 		"gsy-e/Structs.sol": {
-			"keccak256": "0xa199a1cf0da6eb9982b45b83869161e1f586ad82d0ba14ffa755e72b5537cbad",
+			"keccak256": "0x2a9ebcf05cab617529b01d832db0fc1270321e666f198461da8395df236f42f2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f2f80f0738edb4dfd3544c1196df7460853ecb50ae97ea95d7b366e3c49e2622",
-				"dweb:/ipfs/Qmc8GoMQXm1e2jK2mbm2B5WujRoAeNhY31d8Zhyn5XdG5P"
+				"bzz-raw://fd5dc1d1443a76c6468e2a1b90991e81f5bdc1d08461061e7030c1401504d66d",
+				"dweb:/ipfs/QmW5n9zLokWjbZydXowTNVN3EoGxswJ6iWdENWFg7tJyg2"
 			]
 		}
 	},
