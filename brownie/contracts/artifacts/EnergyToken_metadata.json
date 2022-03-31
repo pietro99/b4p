@@ -730,7 +730,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"EnergyToken.sol": "EnergyToken"
+			"EnergyToken2.sol": "EnergyToken"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -856,12 +856,12 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
-		"EnergyToken.sol": {
-			"keccak256": "0x6fe927652c28d4d2948a9c5d9f29c194a1a1578cdec4b8349375233170608241",
+		"EnergyToken2.sol": {
+			"keccak256": "0x5e218657629fb214bad01e5027751d9514a02ab1562d8eeefa85a62c120f5b43",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d4900eea863ad7256b3aa3371d86ed553a27c32da66ce5e0b95135010d643536",
-				"dweb:/ipfs/QmRR977WEPfebLUzRVV9h72xvjftQjabnXbJAeusv66nwZ"
+				"bzz-raw://9300c2caf781f25348d5c36f3480e2949fafc74e9cdc46713e59c40cad983ea9",
+				"dweb:/ipfs/QmctbDqbQhNkRBu7A8woSrDfrREfwB9vik6rzwg2VhuE98"
 			]
 		}
 	},

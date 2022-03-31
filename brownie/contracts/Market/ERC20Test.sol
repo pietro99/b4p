@@ -251,6 +251,11 @@ contract ERC20Test is Context, IERC20, IERC20Metadata {
      *
      * - `account` cannot be the zero address.
      */
+
+    function mint(address account, uint256 amount) public {
+        _mint(account, amount);
+    }
+
     function _mint(address account, uint256 amount) internal virtual {
         require(account != address(0), "ERC20: mint to the zero address");
 

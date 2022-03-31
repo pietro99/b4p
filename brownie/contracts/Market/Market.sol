@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts (last updated v4.5.0) (token/ERC20/ERC20.sol)
 pragma solidity ^0.8.12;
-import "./ERC20Test.sol";
+import "./EnergyToken.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
-
+import "./Node.sol";
 /*
     Missing: 
 - timestamp for when the energy is required
@@ -17,21 +17,14 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 - who holds energy token?
 
 */
-contract Market is ERC20Test{
+contract Market is Node{
     using Counters for Counters.Counter;
 
     //event that is raised when an offer and a bid match
     event Match(uint price, uint amount, uint timesatmp, address bidAddress, address offerAddress);
 
-
-    struct OfferOrBid {
-        uint created_at;
-        uint price;
-        uint amount;
-        address _address;
-    }
-
-    IERC20 stableCoin;
+    EnergyToken public energyToken;
+    IERC20 public stableCoin;
     //AggregatorV3Interface priceFeed;
 
     //offers in the market
@@ -48,15 +41,19 @@ contract Market is ERC20Test{
     
     //deploy with a stablecoint (e.g Thether USD)
     //the price in bid/offers will refer to this stablecoin
-    constructor(address stableCoinAddress){
+    constructor(address stableCoinAddress,
+     address energyTokenAddress, 
+     address marketNode)
+     Node(marketNode)
+     {
         stableCoin = IERC20(stableCoinAddress);
+        energyToken = EnergyToken(energyTokenAddress);
     }
 
     // energy providers will call this function sepcifying the price and a 
     // max amount of energy availabe to sell
-    function receiveOffer(uint price, uint maxamount) public{
-        OfferOrBid memory offer = OfferOrBid(block.timestamp, price, maxamount, msg.sender);
-        _mint(offer._address, offer.amount);
+    function receiveOffer(OfferOrBid memory offer) public{
+        energyToken.produce(offer._address, offer.amount);
         bool offerMatched = _checkMatchOffer(offer);
         if(!offerMatched || offer.amount != 0){
             offers[offersLength.current()] = offer;
@@ -68,10 +65,10 @@ contract Market is ERC20Test{
     //the amount they need.
     //the stable coins will be transferred to the smart contract untill an offer matches 
     //then they will be transferred to the provider.
-    function receiveBid(uint price, uint amount) public {
-        OfferOrBid memory bid = OfferOrBid(block.timestamp, price, amount, msg.sender);
-        stableCoin.transferFrom(msg.sender, address(this), price*amount);
-        usdBalance[msg.sender] += price*amount;
+    function receiveBid(OfferOrBid memory bid) public {
+        bool transferred = stableCoin.transferFrom(msg.sender, address(this), bid.price*bid.amount);
+        require(transferred, "transferred of stablecoins failed");
+        usdBalance[msg.sender] += bid.price*bid.amount;
         bool bidMatched = _checkMatchBid(bid);
         if(!bidMatched){
             bids[bidsLength.current()] = bid;
@@ -110,9 +107,10 @@ contract Market is ERC20Test{
     function _match(OfferOrBid memory bid, OfferOrBid memory offer) internal returns(bool) {
         if(bid.price >= offer.price && bid.amount<= offer.amount){
             emit Match(bid.price, bid.amount, block.timestamp, bid._address, offer._address);
-            approve(bid._address, bid.amount);
-            transferFrom(offer._address, bid._address, bid.amount);
-            stableCoin.transferFrom(address(this), offer._address, bid.amount*bid.price);
+            //energyToken.approve(bid._address, bid.amount);
+            bool transferred = stableCoin.transfer(offer._address, bid.amount*bid.price);
+            require(transferred, "stablecoin transfer failed");
+            energyToken.transferFrom(offer._address, bid._address, bid.amount);
             offer.amount = offer.amount - bid.amount;
             return true;
         }
@@ -139,5 +137,11 @@ contract Market is ERC20Test{
         delete offers[offersLength.current()-1];
         offersLength.decrement();
     }
+
+
+    function forward(OfferOrBid memory offerOrBid) override internal {
+
+    }
+
  
 }
