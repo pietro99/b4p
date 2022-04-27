@@ -20,7 +20,7 @@ import "@openzeppelin/contracts/utils/introspection/ERC165Checker.sol";
 * @notice This contract allows energy providers to create tokens representing the energy they want to sell
 * @dev This contract is still in an experimental phase
  */
-contract EnergyToken is Context, ERC165, IERC1155, IERC1155MetadataURI, Ownable {
+contract EnergyToken2 is Context, ERC165, IERC1155, IERC1155MetadataURI, Ownable {
     using Address for address;
     using Counters for Counters.Counter;
 

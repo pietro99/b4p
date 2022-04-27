@@ -5,3 +5,8 @@ __pycache__
 build/
 reports/
 .deps/
+/python_env/
+.vscode/
+artifacts/
+
+

@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 
-import "./EnergyToken.sol";
-import "./chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "./EnergyToken2.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract EnergyTokenFactory {
-    EnergyToken[] public energyTokens;
+    EnergyToken2[] public energyTokens;
     AggregatorV3Interface public priceFeed;
 
     constructor() {
@@ -15,7 +15,7 @@ contract EnergyTokenFactory {
     }
 
     function createEnergyToken(string memory _uri) public{
-        EnergyToken token = new EnergyToken(_uri);
+        EnergyToken2 token = new EnergyToken2(_uri);
         energyTokens.push(token);
     }
 
